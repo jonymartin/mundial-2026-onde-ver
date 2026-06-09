@@ -12,30 +12,185 @@
             --card-bg: #ffffff;
             --text-color: #2d3748;
             --border-color: #e2e8f0;
+            
+            /* Cores das Tags dos Canais */
+            --rtp-color: #004691;
+            --sic-color: #e65c00;
+            --tvi-color: #e11b22;
+            --sporttv-color: #111111;
             --yt-color: #ff0000;
         }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 20px; line-height: 1.6; }
-        .container { max-width: 1000px; margin: 0 auto; }
-        header { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid var(--border-color); }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
         h1 { color: var(--primary-color); margin-bottom: 10px; }
         .subtitle { color: #4a5568; font-size: 1.1rem; }
-        .filters-container { background: var(--card-bg); padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 25px; }
-        .filter-title { font-weight: bold; margin-bottom: 10px; color: var(--primary-color); font-size: 0.9rem; text-transform: uppercase; }
-        .filter-groups { display: flex; flex-wrap: wrap; gap: 8px; }
-        .filter-btn { background: #edf2f7; border: none; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-weight: 500; font-size: 0.9rem; transition: all 0.2s; }
-        .filter-btn:hover, .filter-btn.active { background: var(--secondary-color); color: white; }
-        .search-box { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 1rem; margin-bottom: 20px; box-sizing: border-box; }
-        .table-responsive { background: var(--card-bg); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 30px; }
-        table { width: 100%; border-collapse: collapse; text-align: left; }
-        th { background-color: var(--primary-color); color: white; padding: 14px 16px; font-size: 0.95rem; }
-        td { padding: 14px 16px; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; }
+
+        /* Filtros por Grupo */
+        .filters-container {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        .filter-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-groups {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .filter-btn {
+            background: #edf2f7;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        /* Barra de Pesquisa */
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Tabela Clássica */
+        .table-responsive {
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 14px 16px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            vertical-align: middle;
+        }
+
+        tr:last-child td { border-bottom: none; }
         tr:hover { background-color: #f8fafc; }
-        .group-tag { background: #e2e8f0; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.85rem; }
-        .yt-link { color: var(--yt-color); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
-        .yt-link:hover { text-decoration: underline; }
-        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
-        @media (max-width: 768px) { .info-grid { grid-template-columns: 1fr; } }
-        .info-card { background: var(--card-bg); padding: 20px; border-radius: 8px; border-left: 4px solid var(--secondary-color); }
+
+        .group-tag {
+            background: #e2e8f0;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            display: inline-block;
+        }
+
+        /* Estilo das Tags/Badges dos Canais */
+        .channel-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 6px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .channel-badge.rtp { background-color: var(--rtp-color); }
+        .channel-badge.sic { background-color: var(--sic-color); }
+        .channel-badge.tvi { background-color: var(--tvi-color); }
+        .channel-badge.sporttv { background-color: var(--sporttv-color); }
+        
+        .channel-badge.youtube { 
+            background-color: var(--yt-color); 
+            transition: opacity 0.2s;
+        }
+        .channel-badge.youtube:hover {
+            opacity: 0.9;
+            text-decoration: underline;
+        }
+
+        /* Painel Informativo */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 { margin-top: 0; color: var(--primary-color); }
+        .info-card p, .info-card ul { margin-bottom: 0; font-size: 0.9rem; color: #4a5568; }
+        .info-card ul { padding-left: 20px; }
     </style>
 </head>
 <body>
@@ -43,13 +198,13 @@
 <div class="container">
     <header>
         <h1>🏆 FIFA World Cup 2026</h1>
-        <div class="subtitle">Calendário de Transmissões para Portugal</div>
+        <div class="subtitle">Calendário Geral de Transmissões em Portugal (Fase de Grupos)</div>
     </header>
 
     <div class="filters-container">
-        <div class="filter-title">Filtrar por Grupo</div>
+        <div class="filter-title">Filtrar por Grupo / Fase</div>
         <div class="filter-groups">
-            <button class="filter-btn active" onclick="filterGroup('ALL')">Todos os Jogos</button>
+            <button class="filter-btn active" onclick="filterGroup('ALL')">Todos os Jogos (72)</button>
             <button class="filter-btn" onclick="filterGroup('Group A')">Grupo A</button>
             <button class="filter-btn" onclick="filterGroup('Group B')">Grupo B</button>
             <button class="filter-btn" onclick="filterGroup('Group C')">Grupo C</button>
@@ -65,7 +220,7 @@
         </div>
     </div>
 
-    <input type="text" id="searchInput" class="search-box" onkeyup="searchTeams()" placeholder="🔍 Escreve o nome de um país para filtrar...">
+    <input type="text" id="searchInput" class="search-box" onkeyup="searchTeams()" placeholder="🔍 Escreve o nome de um país para filtrar na hora (Ex: México, Brasil, Portugal...)...">
 
     <div class="table-responsive">
         <table id="scheduleTable">
@@ -74,12 +229,83 @@
                     <th>Data</th>
                     <th>Jogo</th>
                     <th>Grupo</th>
-                    <th>Hora (PT)</th>
+                    <th>Hora (WEST / PT)</th>
                     <th>Canais / Plataformas</th>
                 </tr>
             </thead>
-            <tbody id="tableBody">
-                <!-- Os jogos vão ser injetados aqui automaticamente pelo JavaScript -->
+            <tbody>
+                <tr data-group="Group A"><td><strong>Thu, Jun 11</strong></td><td>🇲🇽 Mexico vs. South Africa 🇿🇦</td><td><span class="group-tag">Group A</span></td><td><strong>20:00</strong></td><td><span class="channel-badge tvi">TVI</span> <span class="channel-badge sporttv">Sport TV 5</span> <a href="https://www.youtube.com/@LiveModeTV_PT" target="_blank" class="channel-badge youtube">🔴 LiveMode (YouTube)</a></td></tr>
+                <tr data-group="Group A"><td><strong>Fri, Jun 12</strong></td><td>🇰🇷 South Korea vs. Czechia 🇨🇿</td><td><span class="group-tag">Group A</span></td><td><strong>03:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group B"><td><strong>Fri, Jun 12</strong></td><td>🇨🇦 Canada vs. Bosnia & Herzegovina 🇧🇦</td><td><span class="group-tag">Group B</span></td><td><strong>20:00</strong></td><td><span class="channel-badge sic">SIC</span> <span class="channel-badge sporttv">Sport TV 5</span> <a href="https://www.youtube.com/@LiveModeTV_PT" target="_blank" class="channel-badge youtube">🔴 LiveMode (YouTube)</a></td></tr>
+                <tr data-group="Group D"><td><strong>Sat, Jun 13</strong></td><td>🇺🇸 USA vs. Paraguay 🇵🇾</td><td><span class="group-tag">Group D</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group B"><td><strong>Sat, Jun 13</strong></td><td>🇶🇦 Qatar vs. Switzerland 🇨🇭</td><td><span class="group-tag">Group B</span></td><td><strong>20:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group D"><td><strong>Sun, Jun 14</strong></td><td>🇩🇿 Algeria vs. Poland 🇵🇱</td><td><span class="group-tag">Group D</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group C"><td><strong>Sun, Jun 14</strong></td><td>🇺🇾 Uruguay vs. Jamaica 🇯🇲</td><td><span class="group-tag">Group C</span></td><td><strong>20:00</strong></td><td><span class="channel-badge sic">SIC</span> <span class="channel-badge sporttv">Sport TV 5</span> <a href="https://www.youtube.com/@LiveModeTV_PT" target="_blank" class="channel-badge youtube">🔴 LiveMode (YouTube)</a></td></tr>
+                <tr data-group="Group E"><td><strong>Mon, Jun 15</strong></td><td>🇨🇴 Colombia vs. Oman 🇴🇲</td><td><span class="group-tag">Group E</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group C"><td><strong>Mon, Jun 15</strong></td><td>🇯🇵 Japan vs. Nigeria 🇳🇬</td><td><span class="group-tag">Group C</span></td><td><strong>18:00</strong></td><td><span class="channel-badge rtp">RTP</span> <span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group E"><td><strong>Mon, Jun 15</strong></td><td>🇩🇰 Denmark vs. Venezuela 🇻🇪</td><td><span class="group-tag">Group E</span></td><td><strong>21:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group F"><td><strong>Tue, Jun 16</strong></td><td>🇦🇷 Argentina vs. Australia 🇦🇺</td><td><span class="group-tag">Group F</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span> <a href="https://www.youtube.com/@LiveModeTV_PT" target="_blank" class="channel-badge youtube">🔴 LiveMode (YouTube)</a></td></tr>
+                <tr data-group="Group F"><td><strong>Tue, Jun 16</strong></td><td>🇸🇪 Sweden vs. Saudi Arabia 🇸🇦</td><td><span class="group-tag">Group F</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group H"><td><strong>Tue, Jun 16</strong></td><td>🇮🇷 Iran vs. Chile 🇨🇱</td><td><span class="group-tag">Group H</span></td><td><strong>21:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group G"><td><strong>Wed, Jun 17</strong></td><td>🇪🇸 Spain vs. Tunisia 🇹🇳</td><td><span class="group-tag">Group G</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group G"><td><strong>Wed, Jun 17</strong></td><td>🇩🇪 Germany vs. New Zealand 🇳🇿</td><td><span class="group-tag">Group G</span></td><td><strong>15:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group K"><td><strong>Wed, Jun 17</strong></td><td>🇵🇹 Portugal vs. Congo DR 🇨🇩</td><td><span class="group-tag">Group K</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sic">SIC</span> <span class="channel-badge sporttv">Sport TV 5</span> <a href="https://www.youtube.com/@LiveModeTV_PT" target="_blank" class="channel-badge youtube">🔴 LiveMode (YouTube)</a></td></tr>
+                <tr data-group="Group H"><td><strong>Wed, Jun 17</strong></td><td>🇫🇷 France vs. Panama 🇵🇦</td><td><span class="group-tag">Group H</span></td><td><strong>21:00</strong></td><td><span class="channel-badge rtp">RTP</span> <span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group I"><td><strong>Thu, Jun 18</strong></td><td>🇮🇹 Italy vs. Cameroon 🇨🇲</td><td><span class="group-tag">Group I</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group I"><td><strong>Thu, Jun 18</strong></td><td>🇳🇱 Netherlands vs. Honduras 🇭🇳</td><td><span class="group-tag">Group I</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group L"><td><strong>Thu, Jun 18</strong></td><td>🇧🇷 Brazil vs. UAE 🇦🇪</td><td><span class="group-tag">Group L</span></td><td><strong>21:00</strong></td><td><span class="channel-badge tvi">TVI</span> <span class="channel-badge sporttv">Sport TV 5</span> <a href="https://www.youtube.com/@LiveModeTV_PT" target="_blank" class="channel-badge youtube">🔴 LiveMode (YouTube)</a></td></tr>
+                <tr data-group="Group J"><td><strong>Fri, Jun 19</strong></td><td>🇧🇪 Belgium vs. Uzbekistan 🇺🇿</td><td><span class="group-tag">Group J</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group J"><td><strong>Fri, Jun 19</strong></td><td>🇪🇨 Ecuador vs. Ivory Coast 🇨🇮</td><td><span class="group-tag">Group J</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group L"><td><strong>Fri, Jun 19</strong></td><td>🏴󠁧󠁢󠁥󠁮󠁧󠁿 England vs. Peru 🇵🇪</td><td><span class="group-tag">Group L</span></td><td><strong>21:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group K"><td><strong>Sat, Jun 20</strong></td><td>🇲🇦 Morocco vs. Iraq 🇮🇶</td><td><span class="group-tag">Group K</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group A"><td><strong>Sat, Jun 20</strong></td><td>🇲🇽 Mexico vs. South Korea 🇰🇷</td><td><span class="group-tag">Group A</span></td><td><strong>18:00</strong></td><td><span class="channel-badge tvi">TVI</span> <span class="channel-badge sporttv">Sport TV 5</span> <a href="https://www.youtube.com/@LiveModeTV_PT" target="_blank" class="channel-badge youtube">🔴 LiveMode (YouTube)</a></td></tr>
+                <tr data-group="Group B"><td><strong>Sat, Jun 20</strong></td><td>🇨🇦 Canada vs. Qatar 🇶🇦</td><td><span class="group-tag">Group B</span></td><td><strong>21:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group A"><td><strong>Sun, Jun 21</strong></td><td>🇿🇦 South Africa vs. Czechia 🇨🇿</td><td><span class="group-tag">Group A</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group B"><td><strong>Sun, Jun 21</strong></td><td>🇧🇦 Bosnia & Herzegovina vs. Switzerland 🇨🇭</td><td><span class="group-tag">Group B</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group D"><td><strong>Sun, Jun 21</strong></td><td>🇺🇸 USA vs. Algeria 🇩🇿</td><td><span class="group-tag">Group D</span></td><td><strong>21:00</strong></td><td><span class="channel-badge rtp">RTP</span> <span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group D"><td><strong>Mon, Jun 22</strong></td><td>🇵🇾 Paraguay vs. Poland 🇵🇱</td><td><span class="group-tag">Group D</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group C"><td><strong>Mon, Jun 22</strong></td><td>🇺🇾 Uruguay vs. Japan 🇯🇵</td><td><span class="group-tag">Group C</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group C"><td><strong>Mon, Jun 22</strong></td><td>🇯🇲 Jamaica vs. Nigeria 🇳🇬</td><td><span class="group-tag">Group C</span></td><td><strong>21:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group E"><td><strong>Tue, Jun 23</strong></td><td>🇨🇴 Colombia vs. Denmark 🇩🇰</td><td><span class="group-tag">Group E</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span> <a href="https://www.youtube.com/@LiveModeTV_PT" target="_blank" class="channel-badge youtube">🔴 LiveMode (YouTube)</a></td></tr>
+                <tr data-group="Group E"><td><strong>Tue, Jun 23</strong></td><td>🇴🇲 Oman vs. Venezuela 🇻🇪</td><td><span class="group-tag">Group E</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group F"><td><strong>Tue, Jun 23</strong></td><td>🇦🇷 Argentina vs. Sweden 🇸🇪</td><td><span class="group-tag">Group F</span></td><td><strong>21:00</strong></td><td><span class="channel-badge sic">SIC</span> <span class="channel-badge sporttv">Sport TV 5</span> <a href="https://www.youtube.com/@LiveModeTV_PT" target="_blank" class="channel-badge youtube">🔴 LiveMode (YouTube)</a></td></tr>
+                <tr data-group="Group F"><td><strong>Wed, Jun 24</strong></td><td>🇦🇺 Australia vs. Saudi Arabia 🇸🇦</td><td><span class="group-tag">Group F</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group G"><td><strong>Wed, Jun 24</strong></td><td>🇪🇸 Spain vs. Germany 🇩🇪</td><td><span class="group-tag">Group G</span></td><td><strong>18:00</strong></td><td><span class="channel-badge tvi">TVI</span> <span class="channel-badge sporttv">Sport TV 5</span> <a href="https://www.youtube.com/@LiveModeTV_PT" target="_blank" class="channel-badge youtube">🔴 LiveMode (YouTube)</a></td></tr>
+                <tr data-group="Group G"><td><strong>Wed, Jun 24</strong></td><td>🇹🇳 Tunisia vs. New Zealand 🇳🇿</td><td><span class="group-tag">Group G</span></td><td><strong>21:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group H"><td><strong>Thu, Jun 25</strong></td><td>🇫🇷 France vs. Iran 🇮🇷</td><td><span class="group-tag">Group H</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group H"><td><strong>Thu, Jun 25</strong></td><td>🇵🇦 Panama vs. Chile 🇨🇱</td><td><span class="group-tag">Group H</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group I"><td><strong>Thu, Jun 25</strong></td><td>🇳🇱 Netherlands vs. Italy 🇮🇹</td><td><span class="group-tag">Group I</span></td><td><strong>21:00</strong></td><td><span class="channel-badge rtp">RTP</span> <span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group I"><td><strong>Fri, Jun 26</strong></td><td>🇭🇳 Honduras vs. Cameroon 🇨🇲</td><td><span class="group-tag">Group I</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group J"><td><strong>Fri, Jun 26</strong></td><td>🇪🇨 Ecuador vs. Belgium 🇧🇪</td><td><span class="group-tag">Group J</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group J"><td><strong>Fri, Jun 26</strong></td><td>🇨🇮 Ivory Coast vs. Uzbekistan 🇺🇿</td><td><span class="group-tag">Group J</span></td><td><strong>21:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group L"><td><strong>Sat, Jun 27</strong></td><td>🇧🇷 Brazil vs. England 🏴󠁧󠁢󠁥󠁮󠁧󠁿</td><td><span class="group-tag">Group L</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sic">SIC</span> <span class="channel-badge sporttv">Sport TV 5</span> <a href="https://www.youtube.com/@LiveModeTV_PT" target="_blank" class="channel-badge youtube">🔴 LiveMode (YouTube)</a></td></tr>
+                <tr data-group="Group L"><td><strong>Sat, Jun 27</strong></td><td>🇦🇪 UAE vs. Peru 🇵🇪</td><td><span class="group-tag">Group L</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group K"><td><strong>Sat, Jun 27</strong></td><td>🇵🇹 Portugal vs. Morocco 🇲🇦</td><td><span class="group-tag">Group K</span></td><td><strong>21:00</strong></td><td><span class="channel-badge rtp">RTP</span> <span class="channel-badge sporttv">Sport TV 5</span> <a href="https://www.youtube.com/@LiveModeTV_PT" target="_blank" class="channel-badge youtube">🔴 LiveMode (YouTube)</a></td></tr>
+                <tr data-group="Group K"><td><strong>Sun, Jun 28</strong></td><td>🇨🇩 Congo DR vs. Iraq 🇮🇶</td><td><span class="group-tag">Group K</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group A"><td><strong>Sun, Jun 28</strong></td><td>🇨🇿 Czechia vs. Mexico 🇲🇽</td><td><span class="group-tag">Group A</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group A"><td><strong>Sun, Jun 28</strong></td><td>🇿🇦 South Africa vs. South Korea 🇰🇷</td><td><span class="group-tag">Group A</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group B"><td><strong>Mon, Jun 29</strong></td><td>🇨🇭 Switzerland vs. Canada 🇨🇦</td><td><span class="group-tag">Group B</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group B"><td><strong>Mon, Jun 29</strong></td><td>🇧🇦 Bosnia & Herzegovina vs. Qatar 🇶🇦</td><td><span class="group-tag">Group B</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group D"><td><strong>Mon, Jun 29</strong></td><td>🇵🇱 Poland vs. USA 🇺🇸</td><td><span class="group-tag">Group D</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group D"><td><strong>Mon, Jun 29</strong></td><td>🇵🇾 Paraguay vs. Algeria 🇩🇿</td><td><span class="group-tag">Group D</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group C"><td><strong>Tue, Jun 30</strong></td><td>🇳🇬 Nigeria vs. Uruguay 🇺🇾</td><td><span class="group-tag">Group C</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group C"><td><strong>Tue, Jun 30</strong></td><td>🇯🇲 Jamaica vs. Japan 🇯🇵</td><td><span class="group-tag">Group C</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group E"><td><strong>Tue, Jun 30</strong></td><td>🇻🇪 Venezuela vs. Colombia 🇨🇴</td><td><span class="group-tag">Group E</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group E"><td><strong>Tue, Jun 30</strong></td><td>🇴🇲 Oman vs. Denmark 🇩🇰</td><td><span class="group-tag">Group E</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group F"><td><strong>Wed, Jul 01</strong></td><td>🇸🇦 Saudi Arabia vs. Argentina 🇦🇷</td><td><span class="group-tag">Group F</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group F"><td><strong>Wed, Jul 01</strong></td><td>🇦🇺 Australia vs. Sweden 🇸🇪</td><td><span class="group-tag">Group F</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group G"><td><strong>Wed, Jul 01</strong></td><td>🇳🇿 New Zealand vs. Spain 🇪🇸</td><td><span class="group-tag">Group G</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group G"><td><strong>Wed, Jul 01</strong></td><td>🇹🇳 Tunisia vs. Germany 🇩🇪</td><td><span class="group-tag">Group G</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group H"><td><strong>Thu, Jul 02</strong></td><td>🇨🇱 Chile vs. France 🇫🇷</td><td><span class="group-tag">Group H</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group H"><td><strong>Thu, Jul 02</strong></td><td>🇵🇦 Panama vs. Iran 🇮🇷</td><td><span class="group-tag">Group H</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group I"><td><strong>Thu, Jul 02</strong></td><td>🇨🇲 Cameroon vs. Netherlands 🇳🇱</td><td><span class="group-tag">Group I</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group I"><td><strong>Thu, Jul 02</strong></td><td>🇭🇳 Honduras vs. Italy 🇮🇹</td><td><span class="group-tag">Group I</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group J"><td><strong>Fri, Jul 03</strong></td><td>🇺🇿 Uzbekistan vs. Ecuador 🇪🇨</td><td><span class="group-tag">Group J</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group J"><td><strong>Fri, Jul 03</strong></td><td>🇨🇮 Ivory Coast vs. Belgium 🇧🇪</td><td><span class="group-tag">Group J</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group L"><td><strong>Fri, Jul 03</strong></td><td>🇵🇪 Peru vs. Brazil 🇧🇷</td><td><span class="group-tag">Group L</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group L"><td><strong>Fri, Jul 03</strong></td><td>🇦🇪 UAE vs. England 🏴󠁧󠁢󠁥󠁮󠁧󠁿</td><td><span class="group-tag">Group L</span></td><td><strong>18:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
+                <tr data-group="Group K"><td><strong>Sat, Jul 04</strong></td><td>🇮尋 Iraq vs. Portugal 🇵🇹</td><td><span class="group-tag">Group K</span></td><td><strong>02:00</strong></td><td><span class="channel-badge tvi">TVI</span> <span class="channel-badge sporttv">Sport TV 1</span> <a href="https://www.youtube.com/@LiveModeTV_PT" target="_blank" class="channel-badge youtube">🔴 LiveMode (YouTube)</a></td></tr>
+                <tr data-group="Group K"><td><strong>Sat, Jul 04</strong></td><td>🇲🇦 Morocco vs. Congo DR 🇨🇩</td><td><span class="group-tag">Group K</span></td><td><strong>02:00</strong></td><td><span class="channel-badge sporttv">Sport TV 5</span></td></tr>
             </tbody>
         </table>
     </div>
@@ -87,60 +313,29 @@
     <div class="info-grid">
         <div class="info-card">
             <h3>📺 Guia de Canais em Portugal</h3>
-            <p>Se és novo ou tens amigos estrangeiros em Portugal, sintoniza assim:</p>
+            <p>Acesso rápido aos jogos na televisão residencial:</p>
             <ul>
-                <li><strong>RTP, SIC e TVI:</strong> Sinal aberto gratuito. Podes ver direto na TV de casa ou nas apps oficiais (RTP Play, OPTO, TVI Player).</li>
-                <li><strong>Sport TV:</strong> Canais premium dedicados de desporto (pago).</li>
+                <li><strong>RTP, SIC e TVI:</strong> Canais de sinal aberto totalmente gratuitos (TDT ou apps de streaming RTP Play, OPTO e TVI Player).</li>
+                <li><strong>Sport TV:</strong> Rede premium de canais de desporto (requer subscrição paga).</li>
             </ul>
         </div>
         <div class="info-card">
-            <h3>📱 Transmissões Gratuitas no YouTube</h3>
-            <p>Os jogos com o link <strong>🔴 CazéTV (YouTube)</strong> pertencem ao pacote digital da LiveMode e funcionam de forma oficial e gratuita em território nacional.</p>
+            <h3>📱 Transmissões Oficiais Digitais</h3>
+            <p>Os jogos assinalados com o botão vermelho <strong>🔴 LiveMode (YouTube)</strong> estão disponíveis online de forma legal e gratuita em território português, bastando clicar na tag para abrir a transmissão direta.</p>
         </div>
     </div>
 </div>
 
-<!-- LIGAÇÃO À NOSSA BASE DE DADOS DE JOGOS -->
-<script src="jogos.js"></script>
-
 <script>
-// Renderizar os jogos assim que a página carregar
-window.addEventListener('DOMContentLoaded', () => {
-    renderTable(JOGOS_MUNDIAL);
-});
-
-function renderTable(jogos) {
-    const tbody = document.getElementById('tableBody');
-    tbody.innerHTML = '';
-
-    jogos.forEach(j => {
-        // Converte o texto da CazéTV num link HTML dinâmico bonitinho
-        let canalHTML = j.broadcaster;
-        if(canalHTML.includes('CazéTV')) {
-            canalHTML = canalHTML.replace('CazéTV', '<a href="https://www.youtube.com/@CazeTV" target="_blank" class="yt-link">🔴 CazéTV (YouTube)</a>');
-        }
-
-        const row = document.createElement('tr');
-        row.setAttribute('data-group', j.group);
-        row.innerHTML = `
-            <td><strong>${j.date}</strong></td>
-            <td>${j.match}</td>
-            <td><span class="group-tag">${j.group}</span></td>
-            <td><strong>${j.time}</strong></td>
-            <td>${canalHTML}</td>
-        `;
-        tbody.appendChild(row);
-    });
-}
-
 function filterGroup(group) {
     const buttons = document.querySelectorAll('.filter-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');
 
-    const tr = document.getElementById("tableBody").getElementsByTagName("tr");
+    const table = document.getElementById("scheduleTable");
+    const tr = table.getElementsByTagName("tr");
 
-    for (let i = 0; i < tr.length; i++) {
+    for (let i = 1; i < tr.length; i++) {
         const rowGroup = tr[i].getAttribute("data-group");
         if (group === "ALL" || rowGroup === group) {
             tr[i].style.display = "";
@@ -154,13 +349,14 @@ function filterGroup(group) {
 function searchTeams() {
     const input = document.getElementById("searchInput");
     const filter = input.value.toUpperCase();
-    const tr = document.getElementById("tableBody").getElementsByTagName("tr");
+    const table = document.getElementById("scheduleTable");
+    const tr = table.getElementsByTagName("tr");
     
     const buttons = document.querySelectorAll('.filter-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
     buttons[0].classList.add('active');
 
-    for (let i = 0; i < tr.length; i++) {
+    for (let i = 1; i < tr.length; i++) {
         const tdMatch = tr[i].getElementsByTagName("td")[1];
         if (tdMatch) {
             const txtValue = tdMatch.textContent || tdMatch.innerText;
