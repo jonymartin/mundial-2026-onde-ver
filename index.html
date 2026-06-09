@@ -3,427 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Onde Ver o Mundial 2026 - Guia de Transmissão</title>
-    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Calendário Mundial 2026 - Transmissões TV Portugal</title>
     <style>
         :root {
-            --primary-color: #104E3B;
-            --accent-color: #1B7343;
-            --bg-color: #f7faf8;
-            --text-dark: #333;
+            --primary-color: #0d6efd;
+            --primary-hover: #0b5ed7;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #212529;
+            --border-color: #dee2e6;
+            --free-badge: #198754;
+            --paid-badge: #dc3545;
+            --web-badge: #6f42c1;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-dark);
+            color: var(--text-color);
+            line-height: 1.5;
             padding: 20px;
         }
 
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
             border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 25px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: relative;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
         }
 
-        header h1 {
+        h1 {
             font-size: 1.8rem;
-            margin-bottom: 10px;
+            color: #333;
         }
 
-        header p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        .lang-selector {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            color: white;
+        .lang-switch {
             padding: 6px 12px;
-            border-radius: 20px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background: #fff;
             cursor: pointer;
-            font-weight: 600;
-            outline: none;
-            transition: background 0.3s;
+            font-weight: 500;
         }
 
-        .lang-selector:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .lang-selector option {
-            color: var(--text-dark);
-        }
-
-        .search-container {
-            max-width: 600px;
-            margin: 0 auto 25px auto;
-            text-align: center;
-        }
-
-        .search-container input {
-            width: 100%;
-            padding: 12px 20px;
-            font-size: 1rem;
-            border: 2px solid #ccc;
-            border-radius: 25px;
-            outline: none;
-            transition: border-color 0.3s;
-            margin-bottom: 12px;
-        }
-
-        .search-container input:focus {
-            border-color: var(--accent-color);
-        }
-
-        .filter-buttons {
+        .filter-container {
             display: flex;
             gap: 10px;
-            justify-content: center;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
 
         .filter-btn {
-            background: white;
-            border: 1px solid #cbd5e1;
             padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            background: #fff;
             border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
-            color: #475569;
+            font-weight: 500;
+            transition: all 0.2s ease;
         }
 
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--accent-color);
-            color: white;
-            border-color: var(--accent-color);
+        .filter-btn:hover {
+            background: #f1f3f5;
         }
 
-        .table-container {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            max-width: 1000px;
-            margin: 0 auto;
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+        }
+
+        .table-responsive {
+            overflow-x: auto;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            text-align: left;
+            margin-top: 10px;
+            font-size: 0.95rem;
         }
 
         th, td {
-            padding: 14px 18px;
-            border-bottom: 1px solid #eee;
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
         }
 
         th {
-            background-color: var(--accent-color);
-            color: white;
+            background-color: #f1f3f5;
             font-weight: 600;
-            position: sticky;
-            top: 0;
         }
 
         tr:hover {
-            background-color: #f1f5f2;
+            background-color: #f8f9fa;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .time-badge {
+            background: #e9ecef;
+            color: #495057;
         }
 
         .channel-badge {
             display: inline-block;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin: 2px;
-        }
-        
-        .channel-free {
-            background-color: #e1f5fe;
-            color: #0288d1;
-            border: 1px solid #b3e5fc;
-        }
-
-        .channel-paid {
-            background-color: #f1f5f9;
-            color: #334155;
-            border: 1px solid #cbd5e1;
-        }
-
-        .channel-web {
-            background-color: #fef2f2;
-            color: #dc2626;
-            border: 1px solid #fee2e2;
-        }
-
-        .badge {
-            background: #eee;
-            padding: 4px 8px;
+            padding: 3px 8px;
             border-radius: 4px;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            display: inline-block;
+            margin-right: 5px;
+            color: #fff;
         }
 
-        .time-badge {
-            background-color: #e2e8f0;
-            color: #4a5568;
-        }
+        .channel-free { background-color: var(--free-badge); }
+        .channel-paid { background-color: var(--paid-badge); }
+        .channel-web { background-color: var(--web-badge); }
 
         @media (max-width: 768px) {
-            body { padding: 10px; }
-            header { padding: 45px 15px 20px 15px; }
-            .lang-selector { top: 10px; right: 10px; padding: 4px 8px; font-size: 0.85rem; }
-            header h1 { font-size: 1.4rem; }
-            table, thead, tbody, th, td, tr { display: block; }
-            thead tr { position: absolute; top: -9999px; left: -9999px; }
-            
-            tr { 
-                border: 1px solid #e2e8f0;
-                border-radius: 10px;
-                margin-bottom: 15px;
-                background: white;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-                padding: 10px;
-                position: relative;
+            table, thead, tbody, th, td, tr {
+                display: block;
             }
-            tr:hover { background-color: white; }
-            
-            td { 
-                border: none;
-                border-bottom: 1px dashed #f0f0f0; 
-                position: relative;
-                padding-left: 32%;
-                text-align: left;
-                font-size: 0.95rem;
-                padding-top: 12px;
-                padding-bottom: 12px;
-                line-height: 1.4;
-                display: block; 
-                min-height: 44px;
-            }
-            td:last-child { border-bottom: none; }
-            td:before {
-                content: attr(data-label);
-                font-weight: 700;
-                color: #64748b;
+            thead tr {
                 position: absolute;
-                left: 12px;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                margin-bottom: 15px;
+                padding: 10px;
+                background: #fff;
+            }
+            td {
+                border: none;
+                border-bottom: 1px solid #f1f3f5;
+                position: relative;
+                padding-left: 35%;
+                text-align: right;
+            }
+            td:last-child {
+                border-bottom: none;
+            }
+            td:before {
+                position: absolute;
                 top: 12px;
-                font-size: 0.85rem;
-                width: 25%;
+                left: 15px;
+                width: 30%;
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: 600;
+                text-align: left;
+                content: attr(data-label);
             }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <select class="lang-selector" id="langSelect" onchange="changeLanguage()">
-        <option value="pt">PT 🇵🇹</option>
-        <option value="en">EN 🇬🇧</option>
-    </select>
-    <h1 id="mainTitle">🏆 Guia de Transmissão Mundial 2026</h1>
-    <p id="subTitle">Lista de jogos ordenada por transmissão (Hora de Portugal Continental)</p>
-</header>
+<div class="container">
+    <header>
+        <h1 id="pageTitle">Mundial 2026 - Transmissões TV</h1>
+        <select class="lang-switch" id="langSelect" onchange="changeLanguage(this.value)">
+            <option value="pt">🇵🇹 PT</option>
+            <option value="en">🇬🇧 EN</option>
+        </select>
+    </header>
 
-<div class="search-container">
-    <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Pesquise por país, grupo ou canal...">
-        <div class="filter-container">
-            <button class="filter-btn active" onclick="setFilter('all')">Todos os Jogos</button>
-            <button class="filter-btn" onclick="setFilter('free')">Canal Aberto / Grátis</button>
-            <button class="filter-btn" onclick="setFilter('youtube')">Apenas YouTube</button>
-            <button class="filter-btn" onclick="setFilter('paid')">Canal Pago</button>
-            <button class="filter-btn" onclick="setFilter('portugal')">Jogos de Portugal</button>
-        </div>
+    <div class="filter-container">
+        <button class="filter-btn active" id="btnAll" onclick="setFilter('all')">Todos os Jogos</button>
+        <button class="filter-btn" id="btnFree" onclick="setFilter('free')">Canal Aberto / Grátis</button>
+    </div>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th id="thDate">Data</th>
+                    <th id="thMatch">Jogo</th>
+                    <th id="thGroup">Grupo</th>
+                    <th id="thTime">Hora (PT)</th>
+                    <th id="thTV">Canais</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Preenchido via JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <footer style="text-align: center; margin-top: 30px; padding: 20px 0 10px 0; font-size: 0.85rem; color: #888; border-top: 1px solid #dee2e6;">
+        <p><strong>Disclaimer:</strong> Este site é meramente informativo e não tem qualquer ligação oficial com a FIFA ou as estações de televisão mencionadas. Os horários e transmissões estão sujeitos a alterações por parte dos operadores móveis ou canais de televisão.</p>
+    </footer>
 </div>
 
-<div class="table-container">
-    <table id="matchTable">
-        <thead>
-            <tr>
-                <th id="thDate">Data</th>
-                <th id="thMatch">Jogo</th>
-                <th id="thGroup">Grupo</th>
-                <th id="thTime">Hora</th>
-                <th id="thTV">Canais de Transmissão</th>
-            </tr>
-        </thead>
-        <tbody id="tableBody"></tbody>
-    </table>
-</div>
-
-<!-- Importação da base de dados exterior -->
+<!-- Scripts -->
 <script src="jogos.js?v=1.1"></script>
-
 <script>
-const translations = {
-    pt: {
-        title: "🏆 Guia de Transmissão Mundial 2026",
-        subtitle: "Lista de jogos ordenada por transmissão (Hora de Portugal Continental)",
-        placeholder: "Pesquise por país, grupo ou canal...",
-        thDate: "Data",
-        thMatch: "Jogo",
-        thGroup: "Grupo",
-        thTime: "Hora",
-        thTV: "Canais de Transmissão",
-        lblDate: "Data",
-        lblMatch: "Jogo",
-        lblGroup: "Grupo",
-        lblTime: "Hora",
-        lblTV: "Canais",
-        btnAll: "Todos os Jogos",
-        btnPT: "🇵🇹 Portugal",
-        btnFree: "📺 Canal Aberto"
-    },
-    en: {
-        title: "🏆 World Cup 2026 - Broadcast Guide",
-        subtitle: "Complete match list in transmission order (Portugal Time / WEST)",
-        placeholder: "Search by country, group or channel...",
-        thDate: "Date",
-        thMatch: "Match",
-        thGroup: "Group",
-        thTime: "Time",
-        thTV: "Channels",
-        lblDate: "Date",
-        lblMatch: "Match",
-        lblGroup: "Group",
-        lblTime: "Time",
-        lblTV: "Channels",
-        btnAll: "All Matches",
-        btnPT: "🇵🇹 Portugal",
-        btnFree: "📺 Free-to-Air"
-    }
-};
+    let currentLang = "pt";
+    let activeFilter = "all";
 
-let currentLang = "pt";
-let activeFilter = "all";
-
-function buildTable(matches) {
-    const tableBody = document.getElementById("tableBody");
-    tableBody.innerHTML = "";
-
-    matches.forEach(item => {
-        // --- NOVAS LÓGICAS DE FILTRO ---
-        
-        // 1. Filtro Portugal
-        if (activeFilter === "portugal" && !item.isPT) return;
-        
-        // 2. Filtro Canal Aberto / Grátis (Agora inclui TV aberta OU YouTube)
-        if (activeFilter === "free") {
-            const hasFreeTV = item.isFree;
-            const hasYouTube = item.TV.includes("YouTube");
-            if (!hasFreeTV && !hasYouTube) return;
+    const translations = {
+        pt: {
+            title: "Mundial 2026 - Transmissões TV",
+            btnAll: "Todos os Jogos",
+            btnFree: "Canal Aberto / Grátis",
+            thDate: "Data",
+            thMatch: "Jogo",
+            thGroup: "Grupo",
+            thTime: "Hora (PT)",
+            thTV: "Canais",
+            lblDate: "Data",
+            lblMatch: "Jogo",
+            lblGroup: "Grupo",
+            lblTime: "Hora (PT)",
+            lblTV: "Canais"
+        },
+        en: {
+            title: "World Cup 2026 - TV Broadcasts",
+            btnAll: "All Matches",
+            btnFree: "Free-to-Air / Free",
+            thDate: "Date",
+            thMatch: "Match",
+            thGroup: "Group",
+            thTime: "Time (PT)",
+            thTV: "Channels",
+            lblDate: "Date",
+            lblMatch: "Match",
+            lblGroup: "Group",
+            lblTime: "Time",
+            lblTV: "Channels"
         }
-        
-        // 3. Filtro Apenas YouTube
-        if (activeFilter === "youtube" && !item.TV.includes("YouTube")) return;
-        
-        // 4. Filtro Canal Pago (Sport TV)
-        if (activeFilter === "paid" && !item.TV.includes("Sport TV")) return;
+    };
 
-        // -------------------------------
+    function changeLanguage(lang) {
+        currentLang = lang;
+        document.getElementById("pageTitle").innerText = translations[lang].title;
+        document.getElementById("btnAll").innerText = translations[lang].btnAll;
+        document.getElementById("btnFree").innerText = translations[lang].btnFree;
+        document.getElementById("thDate").innerText = translations[lang].thDate;
+        document.getElementById("thMatch").innerText = translations[lang].thMatch;
+        document.getElementById("thGroup").innerText = translations[lang].thGroup;
+        document.getElementById("thTime").innerText = translations[lang].thTime;
+        document.getElementById("thTV").innerText = translations[lang].thTV;
+        buildTable(mundialMatches);
+    }
 
-        const row = document.createElement("tr");
-        
-        row.innerHTML = `
-            <td data-label="${translations[currentLang].lblDate}">${item.date[currentLang]}</td>
-            <td data-label="${translations[currentLang].lblMatch}">${item.match[currentLang]}</td>
-            <td data-label="${translations[currentLang].lblGroup}">${item.group[currentLang]}</td>
-            <td data-label="${translations[currentLang].lblTime}"><span class="badge time-badge">${item.time}</span></td>
-            <td data-label="${translations[currentLang].lblTV}">${item.TV}</td>
-        `;
-        tableBody.appendChild(row);
-    });
-}
+    function setFilter(filterType) {
+        activeFilter = filterType;
+        document.getElementById("btnAll").classList.remove("active");
+        document.getElementById("btnFree").classList.remove("active");
 
-let activeFilter = "all";
+        if (filterType === "all") {
+            document.getElementById("btnAll").classList.add("active");
+        } else if (filterType === "free") {
+            document.getElementById("btnFree").classList.add("active");
+        }
+        buildTable(mundialMatches);
+    }
 
-function setFilter(filterType) {
-    activeFilter = filterType;
-    
-    // Atualiza a classe ativa nos botões para o feedback visual continuar a funcionar
-    const buttons = document.querySelectorAll(".filter-btn");
-    buttons.forEach(btn => btn.classList.remove("active"));
-    
-    // Mapeia o clique ao botão correto
-    const currentBtn = Array.from(buttons).find(btn => {
-        if (filterType === 'all') return btn.getAttribute('onclick').includes('all');
-        if (filterType === 'free') return btn.getAttribute('onclick').includes('free');
-        if (filterType === 'youtube') return btn.getAttribute('onclick').includes('youtube');
-        if (filterType === 'paid') return btn.getAttribute('onclick').includes('paid');
-        if (filterType === 'portugal') return btn.getAttribute('onclick').includes('portugal');
-    });
-    if (currentBtn) currentBtn.classList.add("active");
+    function buildTable(matches) {
+        const tableBody = document.getElementById("tableBody");
+        tableBody.innerHTML = "";
 
-    // Recarrega a tabela com o filtro selecionado
-    buildTable(mundialMatches);
-}
-
-function changeLanguage() {
-    currentLang = document.getElementById("langSelect").value;
-    
-    document.getElementById("mainTitle").innerText = translations[currentLang].title;
-    document.getElementById("subTitle").innerText = translations[currentLang].subtitle;
-    document.getElementById("searchInput").placeholder = translations[currentLang].placeholder;
-    document.getElementById("thDate").innerText = translations[currentLang].thDate;
-    document.getElementById("thMatch").innerText = translations[currentLang].thMatch;
-    document.getElementById("thGroup").innerText = translations[currentLang].thGroup;
-    document.getElementById("thTime").innerText = translations[currentLang].thTime;
-    document.getElementById("thTV").innerText = translations[currentLang].thTV;
-    
-    document.getElementById("btnAll").innerText = translations[currentLang].btnAll;
-    document.getElementById("btnPT").innerText = translations[currentLang].btnPT;
-    document.getElementById("btnFree").innerText = translations[currentLang].btnFree;
-    
-    buildTable(mundialMatches);
-    filterTable();
-}
-
-function filterTable() {
-    let input = document.getElementById("searchInput");
-    let filter = input.value.toLowerCase();
-    let table = document.getElementById("matchTable");
-    let tr = table.getElementsByTagName("tr");
-
-    for (let i = 1; i < tr.length; i++) {
-        let showRow = false;
-        let tds = tr[i].getElementsByTagName("td");
-        for (let j = 0; j < tds.length; j++) {
-            if (tds[j] && tds[j].innerText.toLowerCase().indexOf(filter) > -1) {
-                showRow = true;
-                break;
+        matches.forEach(item => {
+            // Lógica do Filtro "Canal Aberto / Grátis"
+            if (activeFilter === "free") {
+                const hasFreeTV = item.isFree;
+                const hasYouTube = item.TV.includes("YouTube");
+                // Se não der na TV aberta E não der no YouTube, ignora o jogo neste filtro
+                if (!hasFreeTV && !hasYouTube) return;
             }
-        }
-        tr[i].style.display = showRow ? "" : "none";
-    }
-}
 
-window.onload = function() {
-    buildTable(mundialMatches);
-};
+            const row = document.createElement("tr");
+            
+            row.innerHTML = `
+                <td data-label="${translations[currentLang].lblDate}">${item.date[currentLang]}</td>
+                <td data-label="${translations[currentLang].lblMatch}">${item.match[currentLang]}</td>
+                <td data-label="${translations[currentLang].lblGroup}">${item.group[currentLang]}</td>
+                <td data-label="${translations[currentLang].lblTime}"><span class="badge time-badge">${item.time}</span></td>
+                <td data-label="${translations[currentLang].lblTV}">${item.TV}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    // Inicialização da tabela ao carregar a página
+    window.onload = function() {
+        if (typeof mundialMatches !== 'undefined') {
+            buildTable(mundialMatches);
+        } else {
+            console.error("Erro: A variável mundialMatches não foi encontrada. Certifica-te de que o ficheiro jogos.js está no mesmo diretório.");
+        }
+    };
 </script>
-    <footer style="text-align: center; margin-top: 30px; padding: 20px; font-size: 0.85rem; color: #888; border-top: 1px solid #eee;">
-    <p><strong>Disclaimer:</strong> Este site é meramente informativo e não tem qualquer ligação oficial com a FIFA ou as estações de televisão mencionadas. Os horários e transmissões estão sujeitos a alterações por parte dos operadores móveis ou canais de televisão.</p>
-</footer>
 </body>
 </html>
