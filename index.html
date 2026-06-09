@@ -47,7 +47,6 @@
             opacity: 0.9;
         }
 
-        /* Seletor de Língua */
         .lang-selector {
             position: absolute;
             top: 15px;
@@ -93,7 +92,7 @@
         .table-container {
             background: white;
             border-radius: 12px;
-            overflow-x: auto;
+            overflow: hidden;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
@@ -101,7 +100,6 @@
             width: 100%;
             border-collapse: collapse;
             text-align: left;
-            min-width: 600px;
         }
 
         th, td {
@@ -135,12 +133,84 @@
             color: #4a5568;
         }
 
+        /* ==========================================================================
+           MUDANÇAS PARA MOBILE (Ecrãs até 768px)
+           ========================================================================== */
         @media (max-width: 768px) {
-            body { padding: 10px; }
-            header { padding: 40px 15px 20px 15px; }
-            .lang-selector { top: 10px; right: 10px; padding: 4px 8px; font-size: 0.85rem; }
-            header h1 { font-size: 1.4rem; }
-            th, td { padding: 10px; font-size: 0.9rem; }
+            body { 
+                padding: 10px; 
+            }
+            
+            header { 
+                padding: 45px 15px 20px 15px; 
+            }
+            
+            .lang-selector { 
+                top: 10px; 
+                right: 10px; 
+                padding: 4px 8px; 
+                font-size: 0.85rem; 
+            }
+            
+            header h1 { 
+                font-size: 1.4rem; 
+            }
+
+            /* Força a tabela a deixar de se comportar como uma tabela */
+            table, thead, tbody, th, td, tr { 
+                display: block; 
+            }
+            
+            /* Esconde o cabeçalho original da tabela (Data, Jogo, etc.) porque não cabe */
+            thead tr { 
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            
+            /* Transforma cada linha num cartão (Card) individual */
+            tr { 
+                border: 1px solid #e2e8f0;
+                border-radius: 8px;
+                margin-bottom: 15px;
+                background: white;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+                padding: 8px;
+            }
+
+            tr:hover {
+                background-color: white; /* Desativa o hover de tabela em mobile */
+            }
+            
+            /* Formata cada célula para parecer uma linha de informação dentro do cartão */
+            td { 
+                border: none;
+                border-bottom: 1px dashed #f0f0f0; 
+                position: relative;
+                padding-left: 35%; /* Cria espaço à esquerda para as etiquetas */
+                text-align: left;
+                font-size: 0.95rem;
+                min-height: 40px;
+                display: flex;
+                align-items: center;
+            }
+
+            td:last-child {
+                border-bottom: none; /* Remove a linha tracejada na última célula */
+            }
+            
+            /* Injeta dinamicamente as etiquetas (Data, Jogo, Canais) antes do conteúdo */
+            td:nth-of-type(1):before { content: attr(data-label); font-weight: 700; color: #718096; position: absolute; left: 12px; font-size: 0.85rem; }
+            td:nth-of-type(2):before { content: attr(data-label); font-weight: 700; color: #718096; position: absolute; left: 12px; font-size: 0.85rem; }
+            td:nth-of-type(3):before { content: attr(data-label); font-weight: 700; color: #718096; position: absolute; left: 12px; font-size: 0.85rem; }
+            td:nth-of-type(4):before { content: attr(data-label); font-weight: 700; color: #718096; position: absolute; left: 12px; font-size: 0.85rem; }
+            td:nth-of-type(5):before { content: attr(data-label); font-weight: 700; color: #718096; position: absolute; left: 12px; font-size: 0.85rem; }
+            
+            /* Ajuste extra para os canais não ficarem colados */
+            td:nth-of-type(5) {
+                padding-top: 12px;
+                padding-bottom: 12px;
+            }
         }
     </style>
 </head>
@@ -171,7 +241,8 @@
             </tr>
         </thead>
         <tbody id="tableBody">
-            </tbody>
+            <!-- Os jogos vão ser injetados aqui via JS -->
+        </tbody>
     </table>
 </div>
 
@@ -185,7 +256,12 @@ const translations = {
         thMatch: "Jogo",
         thGroup: "Grupo",
         thTime: "Hora (PT)",
-        thTV: "Canais de Transmissão"
+        thTV: "Canais",
+        lblDate: "Data",
+        lblMatch: "Jogo",
+        lblGroup: "Grupo",
+        lblTime: "Hora",
+        lblTV: "Canais"
     },
     en: {
         title: "🏆 World Cup 2026 - Where to Watch in Portugal",
@@ -195,7 +271,12 @@ const translations = {
         thMatch: "Match",
         thGroup: "Group",
         thTime: "Time (PT)",
-        thTV: "Broadcast Channels"
+        thTV: "Broadcast Channels",
+        lblDate: "Date",
+        lblMatch: "Match",
+        lblGroup: "Group",
+        lblTime: "Time",
+        lblTV: "Channels"
     }
 };
 
@@ -318,12 +399,13 @@ function buildTable(matches) {
     matches.forEach(item => {
         const row = document.createElement("tr");
         
+        // Adicionámos os atributos 'data-label' dinâmicos para suportar as etiquetas em mobile com multi-idioma
         row.innerHTML = `
-            <td>${item.date[currentLang]}</td>
-            <td>${item.match[currentLang]}</td>
-            <td>${item.group[currentLang]}</td>
-            <td><span class="badge time-badge">${item.time}</span></td>
-            <td>${item.TV}</td>
+            <td data-label="${translations[currentLang].lblDate}">${item.date[currentLang]}</td>
+            <td data-label="${translations[currentLang].lblMatch}">${item.match[currentLang]}</td>
+            <td data-label="${translations[currentLang].lblGroup}">${item.group[currentLang]}</td>
+            <td data-label="${translations[currentLang].lblTime}"><span class="badge time-badge">${item.time}</span></td>
+            <td data-label="${translations[currentLang].lblTV}">${item.TV}</td>
         `;
         tableBody.appendChild(row);
     });
