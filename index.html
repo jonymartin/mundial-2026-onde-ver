@@ -291,7 +291,8 @@ const translations = {
         lblTV: "Canais",
         btnAll: "Todos os Jogos",
         btnPT: "🇵🇹 Portugal",
-        btnFree: "📺 Canal Aberto"
+        btnFree: "📺 Canal Aberto",
+        disclaimer: "<strong>Disclaimer:</strong> Este site é meramente informativo e não tem qualquer ligação oficial com a FIFA ou as estações de televisão mencionadas. Os horários e transmissões estão sujeitos a alterações por parte dos operadores ou canais de televisão."
     },
     en: {
         title: "🏆 World Cup 2026 - Broadcast Guide",
@@ -309,7 +310,8 @@ const translations = {
         lblTV: "Channels",
         btnAll: "All Matches",
         btnPT: "🇵🇹 Portugal",
-        btnFree: "📺 Free-to-Air"
+        btnFree: "📺 Free-to-Air",
+        disclaimer: "<strong>Disclaimer:</strong> This website is for informational purposes only and has no official connection with FIFA or the mentioned television stations. Schedules and broadcasts are subject to change by operators or TV channels."
     }
 };
 
@@ -369,6 +371,8 @@ function changeLanguage() {
     document.getElementById("btnAll").innerText = translations[currentLang].btnAll;
     document.getElementById("btnPT").innerText = translations[currentLang].btnPT;
     document.getElementById("btnFree").innerText = translations[currentLang].btnFree;
+
+    document.getElementById("footerDisclaimer").innerHTML = translations[lang].disclaimer;
     
     buildTable(mundialMatches);
     filterTable();
@@ -395,10 +399,12 @@ function filterTable() {
 
 window.onload = function() {
     buildTable(mundialMatches);
+    document.getElementById("footerDisclaimer").innerHTML = translations[currentLang].disclaimer;
 };
 </script>
-    <p style="text-align: center; margin-top: 30px; padding: 20px; font-size: 0.85rem; color: #888; border-top: 1px solid #dee2e6;">
-    <strong>Disclaimer:</strong> Este site é meramente informativo e não tem qualquer ligação oficial com a FIFA ou as estações de televisão mencionadas. Os horários e transmissões estão sujeitos a alterações por parte dos operadores ou canais de televisão.
+    <p id="footerDisclaimer" style="text-align: center; margin-top: 30px; padding: 20px; font-size: 0.85rem; color: #888; border-top: 1px solid #dee2e6;">
+    <!-- O texto vai ser injetado pelo JavaScript -->
+    </p>
 </p>
 </body>
 </html>
