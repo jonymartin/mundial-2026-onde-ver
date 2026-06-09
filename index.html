@@ -2,60 +2,78 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Mundial 2026 - Calendário Oficial</title>
+    <title>Mundial 2026 - Calendário</title>
     <style>
-        body { font-family: 'Inter', -apple-system, sans-serif; background: #f8fafc; color: #1e293b; padding: 20px; }
-        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        #search-bar { width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 20px; font-size: 16px; }
-        table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 12px; border-bottom: 2px solid #e2e8f0; color: #64748b; font-size: 0.85em; text-transform: uppercase; }
-        td { padding: 15px 12px; border-bottom: 1px solid #f1f5f9; }
-        .tag-group { background: #eff6ff; color: #1d4ed8; padding: 4px 8px; border-radius: 6px; font-size: 0.75em; font-weight: 700; }
-        .tag-channel { background: #f1f5f9; color: #475569; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; margin-right: 4px; border: 1px solid #e2e8f0; }
+        /* Estilo limpo da primeira versão */
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; max-width: 900px; margin: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { text-align: left; padding: 12px; border-bottom: 1px solid #ddd; }
+        th { background-color: #f4f4f4; }
+        
+        /* Tags de Canais com Cores */
+        .tag { padding: 4px 8px; border-radius: 4px; font-size: 0.8em; margin-right: 5px; color: white; display: inline-block; }
+        .tvi { background-color: #e53935; }
+        .sic { background-color: #fbc02d; color: black; }
+        .rtp { background-color: #1976d2; }
+        .sporttv { background-color: #388e3c; }
+        .livemode { background-color: #d32f2f; }
+        
+        .disclaimer { margin-top: 30px; font-size: 0.85em; color: #666; border-top: 1px solid #ccc; padding-top: 10px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <h1 id="title">🏆 Mundial 2026</h1>
-        <div><span onclick="setLang('pt')" style="cursor:pointer">PT</span> | <span onclick="setLang('en')" style="cursor:pointer">EN</span></div>
-    </div>
-    
-    <input type="text" id="search-bar" placeholder="🔍 Pesquisar jogo ou equipa..." onkeyup="filterTable()">
-
-    <table id="tabela-jogos">
-        <thead><tr><th>Data</th><th>Jogo</th><th>Grupo</th><th>Hora</th><th>Canais</th></tr></thead>
-        <tbody></tbody>
-    </table>
+<div id="top-bar">
+    <button onclick="changeLang('pt')">Português</button> 
+    <button onclick="changeLang('en')">English</button>
 </div>
 
-<script src="jogos.js?v=1.0.1"></script>
+<h1 id="title">Calendário Mundial 2026</h1>
+
+<table id="tabela-jogos">
+    <thead><tr><th>Data</th><th>Jogo</th><th>Grupo</th><th>Hora</th><th>Canais</th></tr></thead>
+    <tbody></tbody>
+</table>
+
+<div class="disclaimer">
+    <p>Nota: Os horários e canais podem sofrer alterações. Consulte o guia oficial da FIFA para confirmação.</p>
+    <p>© 2026 - Guia de Visualização Mundial 2026</p>
+</div>
+
+<script src="jogos.js"></script>
 <script>
-    function renderTable(data = JOGOS_MUNDIAL) {
+    function getChannelClass(name) {
+        if (name.includes('TVI')) return 'tvi';
+        if (name.includes('SIC')) return 'sic';
+        if (name.includes('RTP')) return 'rtp';
+        if (name.includes('Sport TV')) return 'sporttv';
+        if (name.includes('LiveMode')) return 'livemode';
+        return '';
+    }
+
+    function renderTable() {
         const tbody = document.querySelector('#tabela-jogos tbody');
-        tbody.innerHTML = data.map(j => `
-            <tr>
-                <td>${j.date}</td>
-                <td style="font-weight: 600">${j.match}</td>
-                <td><span class="tag-group">${j.group}</span></td>
-                <td>${j.time}</td>
-                <td>${j.broadcaster.split('/').map(c => `<span class="tag-channel">${c.trim()}</span>`).join('')}</td>
-            </tr>
-        `).join('');
+        tbody.innerHTML = JOGOS_MUNDIAL.map(j => {
+            const canais = j.broadcaster.split('/').map(c => {
+                const clean = c.trim();
+                if (clean.includes('LiveMode')) {
+                    return `<a href="https://www.youtube.com/@LiveMode" target="_blank" class="tag ${getChannelClass(clean)}">${clean}</a>`;
+                }
+                return `<span class="tag ${getChannelClass(clean)}">${clean}</span>`;
+            }).join('');
+            
+            return `<tr><td>${j.date}</td><td>${j.match}</td><td>${j.group}</td><td>${j.time}</td><td>${canais}</td></tr>`;
+        }).join('');
     }
 
-    function filterTable() {
-        const query = document.getElementById('search-bar').value.toLowerCase();
-        const filtered = JOGOS_MUNDIAL.filter(j => j.match.toLowerCase().includes(query));
-        renderTable(filtered);
+    function changeLang(lang) {
+        if(lang === 'en') {
+            document.getElementById('title').innerText = "2026 World Cup Schedule";
+        } else {
+            document.getElementById('title').innerText = "Calendário Mundial 2026";
+        }
     }
-
-    function setLang(lang) {
-        document.getElementById('title').innerText = (lang === 'pt') ? "🏆 Mundial 2026" : "🏆 World Cup 2026";
-    }
-
+    
     renderTable();
 </script>
 </body>
