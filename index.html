@@ -325,6 +325,17 @@ function buildTable(matches) {
         if (activeFilter === "free" && !item.isFree) return;
 
         const row = document.createElement("tr");
+
+        // --- ADICIONADO AQUI: Lógica para colocar link no YouTube ---
+        let tvChannels = item.TV;
+        if (tvChannels.includes("YouTube")) {
+            // Substitui a badge normal do YouTube por uma versão com link (<a>) para o canal da LiveMode
+            tvChannels = tvChannels.replace(
+                '<span class="channel-badge channel-web">YouTube</span>',
+                '<a href="https://www.youtube.com/@LiveMode" target="_blank" style="text-decoration: none;"><span class="channel-badge channel-web">YouTube 🔗</span></a>'
+            );
+        }
+        // ------------------------------------------------------------
         
         row.innerHTML = `
             <td data-label="${translations[currentLang].lblDate}">${item.date[currentLang]}</td>
