@@ -2,16 +2,17 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Mundial 2026 - Calendário</title>
+    <title>Mundial 2026 - Calendário Oficial</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; color: #333; margin: 0; padding: 20px; }
-        .container { max-width: 1000px; margin: auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .lang-switch { cursor: pointer; color: #2b6cb0; font-weight: bold; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th { background: #1a365d; color: white; padding: 12px; text-align: left; }
-        td { padding: 10px; border-bottom: 1px solid #ddd; }
-        .tag { background: #e2e8f0; padding: 3px 8px; border-radius: 4px; font-size: 0.8em; font-weight: bold; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: #f8fafc; color: #1e293b; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        #search-bar { width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 20px; font-size: 16px; }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 12px; border-bottom: 2px solid #e2e8f0; color: #64748b; font-size: 0.85em; text-transform: uppercase; }
+        td { padding: 15px 12px; border-bottom: 1px solid #f1f5f9; }
+        .tag-group { background: #eff6ff; color: #1d4ed8; padding: 4px 8px; border-radius: 6px; font-size: 0.75em; font-weight: 700; }
+        .tag-channel { background: #f1f5f9; color: #475569; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; margin-right: 4px; border: 1px solid #e2e8f0; }
     </style>
 </head>
 <body>
@@ -19,32 +20,36 @@
 <div class="container">
     <div class="header">
         <h1 id="title">🏆 Mundial 2026</h1>
-        <div class="lang-switch">
-            <span onclick="setLang('pt')">PT</span> | <span onclick="setLang('en')">EN</span>
-        </div>
+        <div><span onclick="setLang('pt')" style="cursor:pointer">PT</span> | <span onclick="setLang('en')" style="cursor:pointer">EN</span></div>
     </div>
     
-    <table>
-        <thead>
-            <tr><th>Data</th><th>Jogo</th><th>Grupo</th><th>Hora</th><th>Canais</th></tr>
-        </thead>
-        <tbody id="tabela-jogos"></tbody>
+    <input type="text" id="search-bar" placeholder="🔍 Pesquisar jogo ou equipa..." onkeyup="filterTable()">
+
+    <table id="tabela-jogos">
+        <thead><tr><th>Data</th><th>Jogo</th><th>Grupo</th><th>Hora</th><th>Canais</th></tr></thead>
+        <tbody></tbody>
     </table>
 </div>
 
-<script src="jogos.js?v=1.0.0"></script>
+<script src="jogos.js?v=1.0.1"></script>
 <script>
-    function renderTable() {
-        const tbody = document.getElementById('tabela-jogos');
-        tbody.innerHTML = JOGOS_MUNDIAL.map(j => `
+    function renderTable(data = JOGOS_MUNDIAL) {
+        const tbody = document.querySelector('#tabela-jogos tbody');
+        tbody.innerHTML = data.map(j => `
             <tr>
                 <td>${j.date}</td>
-                <td>${j.match}</td>
-                <td><span class="tag">${j.group}</span></td>
+                <td style="font-weight: 600">${j.match}</td>
+                <td><span class="tag-group">${j.group}</span></td>
                 <td>${j.time}</td>
-                <td>${j.broadcaster}</td>
+                <td>${j.broadcaster.split('/').map(c => `<span class="tag-channel">${c.trim()}</span>`).join('')}</td>
             </tr>
         `).join('');
+    }
+
+    function filterTable() {
+        const query = document.getElementById('search-bar').value.toLowerCase();
+        const filtered = JOGOS_MUNDIAL.filter(j => j.match.toLowerCase().includes(query));
+        renderTable(filtered);
     }
 
     function setLang(lang) {
