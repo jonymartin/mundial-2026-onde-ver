@@ -326,10 +326,9 @@ function buildTable(matches) {
 
         const row = document.createElement("tr");
 
-        // --- ADICIONADO AQUI: Lógica para colocar link no YouTube ---
+        // --- ADICIONADO AQUI: Lógica para colocar o link no YouTube ---
         let tvChannels = item.TV;
         if (tvChannels.includes("YouTube")) {
-            // Substitui a badge normal do YouTube por uma versão com link (<a>) para o canal da LiveMode
             tvChannels = tvChannels.replace(
                 '<span class="channel-badge channel-web">YouTube</span>',
                 '<a href="https://www.youtube.com/@LiveMode" target="_blank" style="text-decoration: none;"><span class="channel-badge channel-web">YouTube 🔗</span></a>'
