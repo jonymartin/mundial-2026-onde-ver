@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onde Ver o Mundial 2026 - Guia de Transmissão Portugal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #104E3B;
+            --accent-color: #1B7343;
+            --bg-color: #f7faf8;
+            --card-pt: #e6f4ea;
+            --text-dark: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto 25px auto;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border: 2px solid #ccc;
+            border-radius: 25px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-container input:focus {
+            border-color: var(--accent-color);
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow-x: auto;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 14px 18px;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        tr:hover {
+            background-color: #f1f5f2;
+        }
+
+        .highlight-pt {
+            background-color: var(--card-pt) !important;
+            font-weight: bold;
+        }
+
+        .badge {
+            background: #eee;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .time-badge {
+            background-color: #e2e8f0;
+            color: #4a5568;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            header h1 { font-size: 1.4rem; }
+            th, td { padding: 10px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🏆 Mundial 2026 - Onde Ver em Portugal</h1>
+    <p>Guia completo corrigido segundo a lista oficial do Flashscore (Hora de Portugal Continental)</p>
+</header>
+
+<div class="search-container">
+    <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Pesquise por país, grupo ou canal (ex: Portugal, TVI, Grupo K)...">
+</div>
+
+<div class="table-container">
+    <table id="matchTable">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Jogo</th>
+                <th>Grupo</th>
+                <th>Hora (PT)</th>
+                <th>Canais de Transmissão</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <!-- Os jogos corrigidos vão ser injetados aqui -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+// Base de dados corrigida e alinhada a 100% com o calendário Flashscore
+const mundialMatches = [
+    {date: "Qui, 11 Jun", match: "🇲🇽 México vs. África do Sul 🇿🇦 (Abertura)", group: "Grupo A", time: "20:00", TV: "<strong>TVI</strong> / Sport TV 5 / LiveMode TV (YouTube)"},
+    {date: "Sex, 12 Jun", match: "🇰🇷 Coreia do Sul vs. Chéquia 🇨🇿", group: "Grupo A", time: "03:00", TV: "Sport TV 5"},
+    {date: "Sex, 12 Jun", match: "🇨🇦 Canadá vs. Bósnia & Herzegovina 🇧🇦", group: "Grupo B", time: "20:00", TV: "<strong>SIC</strong> / Sport TV 5 / LiveMode TV (YouTube)"},
+    {date: "Sáb, 13 Jun", match: "🇺🇸 EUA vs. Paraguai 🇵🇾", group: "Grupo D", time: "02:00", TV: "Sport TV 5"},
+    {date: "Sáb, 13 Jun", match: "🇶🇦 Qatar vs. Suíça 🇨🇭", group: "Grupo B", time: "20:00", TV: "Sport TV 5"},
+    {date: "Sáb, 13 Jun", match: "🇧🇷 Brasil vs. Marrocos 🇲🇦", group: "Grupo C", time: "23:00", TV: "Sport TV 5 / LiveMode TV (YouTube)"},
+    {date: "Dom, 14 Jun", match: "🇭🇹 Haiti vs. Escócia 🏴󠁧󠁢󠁳󠁣󠁴󠁿", group: "Grupo C", time: "02:00", TV: "Sport TV 5"},
+    {date: "Dom, 14 Jun", match: "🇦🇺 Austrália vs. Turquia 🇹🇷", group: "Grupo D", time: "05:00", TV: "Sport TV 5"},
+    {date: "Dom, 14 Jun", match: "🇩🇪 Alemanha vs. Curaçau 🇨🇼", group: "Grupo E", time: "18:00", TV: "Sport TV 5 / LiveMode TV (YouTube)"},
+    {date: "Dom, 14 Jun", match: "🇳🇱 Países Baixos vs. Japão 🇯🇵", group: "Grupo F", time: "21:00", TV: "Sport TV 5"},
+    {date: "Seg, 15 Jun", match: "🇨🇮 Costa do Marfim vs. Equador 🇪🇨", group: "Grupo E", time: "00:00", TV: "Sport TV 5"},
+    {date: "Seg, 15 Jun", match: "🇸🇪 Suécia vs. Tunísia 🇹🇳", group: "Grupo F", time: "03:00", TV: "Sport TV 5"},
+    {date: "Seg, 15 Jun", match: "🇪🇸 Espanha vs. Cabo Verde 🇨🇻", group: "Grupo H", time: "17:00", TV: "Sport TV 5 / LiveMode TV (YouTube)"},
+    {date: "Seg, 15 Jun", match: "🇧🇪 Bélgica vs. Egito 🇪🇬", group: "Grupo G", time: "20:00", TV: "Sport TV 5"},
+    {date: "Seg, 15 Jun", match: "🇸🇦 Arábia Saudita vs. Uruguai 🇺🇾", group: "Grupo H", time: "23:00", TV: "Sport TV 5"},
+    {date: "Ter, 16 Jun", match: "🇮🇷 Irão vs. Nova Zelândia 🇳🇿", group: "Grupo G", time: "02:00", TV: "Sport TV 5"},
+    {date: "Ter, 16 Jun", match: "🇫🇷 França vs. Senegal 🇸🇳", group: "Grupo I", time: "20:00", TV: "<strong>RTP</strong> / Sport TV 5 / LiveMode TV (YouTube)"},
+    {date: "Ter, 16 Jun", match: "🇮🇶 Iraque vs. Noruega 🇳🇴", group: "Grupo I", time: "23:00", TV: "Sport TV 5"},
+    {date: "Qua, 17 Jun", match: "🇦🇷 Argentina vs. Argélia 🇩🇿", group: "Grupo J", time: "02:00", TV: "Sport TV 5"},
+    {date: "Qua, 17 Jun", match: "🇦🇹 Áustria vs. Jordânia 🇯🇴", group: "Grupo J", time: "05:00", TV: "Sport TV 5"},
+    {date: "Qua, 17 Jun", match: "🇵🇹 Portugal vs. RD Congo 🇨🇩", group: "Grupo K", time: "18:00", TV: "<strong>SIC</strong> / Sport TV 5 / LiveMode TV (YouTube)"},
+    {date: "Qua, 17 Jun", match: "🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra vs. Croácia 🇭🇷", group: "Grupo L", time: "21:00", TV: "Sport TV 5"},
+    {date: "Qui, 18 Jun", match: "🇬🇭 Gana vs. Panamá 🇵🇦", group: "Grupo L", time: "00:00", TV: "Sport TV 5"},
+    {date: "Qui, 18 Jun", match: "🇺🇿 Usbequistão vs. Colômbia 🇨🇴", group: "Grupo K", time: "03:00", TV: "Sport TV 5"},
+    {date: "Qui, 18 Jun", match: "🇨🇿 Chéquia vs. África do Sul 🇿🇦", group: "Grupo A", time: "17:00", TV: "Sport TV 5"},
+    {date: "Qui, 18 Jun", match: "🇨🇭 Suíça vs. Bósnia & Herzegovina 🇧🇦", group: "Grupo B", time: "20:00", TV: "<strong>RTP</strong> / Sport TV 5 / LiveMode TV (YouTube)"},
+    {date: "Qui, 18 Jun", match: "🇨🇦 Canadá vs. Qatar 🇶🇦", group: "Grupo B", time: "23:00", TV: "Sport TV 5"},
+    {date: "Sex, 19 Jun", match: "🇲🇽 México vs. Coreia do Sul 🇰🇷", group: "Grupo A", time: "02:00", TV: "Sport TV 5"},
+    {date: "Sex, 19 Jun", match: "🇺🇸 EUA vs. Austrália 🇦🇺", group: "Grupo D", time: "20:00", TV: "Sport TV 5"},
+    {date: "Sex, 19 Jun", match: "🏴\u200dApp Escócia vs. Marrocos 🇲🇦", group: "Grupo C", time: "23:00", TV: "Sport TV 5"},
+    {date: "Sáb, 20 Jun", match: "🇧🇷 Brasil vs. Haiti 🇭🇹", group: "Grupo C", time: "02:00", TV: "Sport TV 5 / LiveMode TV (YouTube)"},
+    {date: "Sáb, 20 Jun", match: "🇹🇷 Turquia vs. Paraguai 🇵🇾", group: "Grupo D", time: "05:00", TV: "Sport TV 5"},
+    {date: "Sáb, 20 Jun", match: "🇳🇱 Países Baixos vs. Suécia 🇸🇪", group: "Grupo F", time: "18:00", TV: "Sport TV 5"},
+    {date: "Sáb, 20 Jun", match: "🇩🇪 Alemanha vs. Costa do Marfim 🇨🇮", group: "Grupo E", time: "21:00", TV: "<strong>TVI</strong> / Sport TV 5 / LiveMode TV (YouTube)"},
+    {date: "Dom, 21 Jun", match: "🇪🇨 Equador vs. Curaçau 🇨🇼", group: "Grupo E", time: "00:00", TV: "Sport TV 5"},
+    {date: "Dom, 21 Jun", match: "🇹🇳 Tunísia vs. Japão 🇯🇵", group: "Grupo F", time: "05:00", TV: "Sport TV 5"},
+    {date: "Dom, 21 Jun", match: "🇪🇸 Espanha vs. Arábia Saudita 🇸🇦", group: "Grupo H", time: "17:00", TV: "Sport TV 5 / LiveMode TV (YouTube)"},
+    {date: "Dom, 21 Jun", match: "🇧🇪 Bélgica vs. Irão 🇮🇷", group: "Grupo G", time: "20:00", TV: "Sport TV 5"},
+    {date: "Dom, 21 Jun", match: "🇺🇾 Uruguai vs. Cabo Verde 🇨🇻", group: "Grupo H", time: "23:00", TV: "Sport TV 5"},
+    {date: "Seg, 22 Jun", match: "🇳🇿 Nova Zelândia vs. Egito 🇪🇬", group: "Grupo G", time: "02:00", TV: "Sport TV 5"},
+    {date: "Seg, 22 Jun", match: "🇫🇷 França vs. Iraque 🇮🇶", group: "Grupo I", time: "20:00", TV: "Sport TV 5 / LiveMode TV (YouTube)"},
+    {date: "Seg, 22 Jun", match: "🇳🇴 Noruega vs. Senegal 🇸🇳", group: "Grupo I", time: "23:00", TV: "Sport TV 5"},
+    {date: "Ter, 23 Jun", match: "🇦🇷 Argentina vs. Áustria 🇦🇹", group: "Grupo J", time: "02:00", TV: "Sport TV 5"},
+    {date: "Ter, 23 Jun", match: "🇯🇴 Jordânia vs. Argélia 🇩🇿", group: "Grupo J", time: "05:00", TV: "Sport TV 5"},
+    {date: "Ter, 23 Jun", match: "🇵🇹 Portugal vs. Usbequistão 🇺🇿", group: "Grupo K", time: "18:00", TV: "<strong>TVI</strong> / Sport TV 5 / LiveMode TV (YouTube)"},
+    {date: "Ter, 23 Jun", match: "🏴\u200d󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra vs. Gana 🇬🇭", group: "Grupo L", time: "21:00", TV: "Sport TV 5"},
+    {date: "Qua, 24 Jun", match: "🇵🇦 Panamá vs. Croácia 🇭🇷", group: "Grupo L", time: "00:00", TV: "Sport TV 5"},
+    {date: "Qua, 24 Jun", match: "🇨🇴 Colômbia vs. RD Congo 🇨🇩", group: "Grupo K", time: "03:00", TV: "Sport TV 5"},
+    {date: "Qua, 24 Jun", match: "🇨🇿 Chéquia vs. México 🇲🇽", group: "Grupo A", time: "21:00", TV: "Sport TV 1"},
+    {date: "Qua, 24 Jun", match: "🇿🇦 África do Sul vs. Coreia do Sul 🇰🇷", group: "Grupo A", time: "21:00", TV: "Sport TV 5"},
+    {date: "Qui, 25 Jun", match: "🏴\u200d󠁧󠁢󠁳󠁣󠁴󠁿 Escócia vs. Brasil 🇧🇷", group: "Grupo C", time: "00:00", TV: "Sport TV 5 / LiveMode TV (YouTube)"},
+    {date: "Qui, 25 Jun", match: "🇲🇦 Marrocos vs. Haiti 🇭🇹", group: "Grupo C", time: "00:00", TV: "Sport TV 1"},
+    {date: "Qui, 25 Jun", match: "🇨🇭 Suíça vs. Canadá 🇨🇦", group: "Grupo B", time: "03:00", TV: "Sport TV 5"},
+    {date: "Qui, 25 Jun", match: "🇧🇦 Bósnia & Herzegovina vs. Qatar 🇶🇦", group: "Grupo B", time: "03:00", TV: "Sport TV 1"},
+    {date: "Qui, 25 Jun", match: "🇨🇼 Curaçau vs. Costa do Marfim 🇨🇮", group: "Grupo E", time: "20:00", TV: "Sport TV 1"},
+    {date: "Qui, 25 Jun", match: "🇪🇨 Equador vs. Alemanha 🇩🇪", group: "Grupo E", time: "20:00", TV: "<strong>SIC</strong> / Sport TV 5"},
+    {date: "Qui, 25 Jun", match: "🇯🇵 Japão vs. Suécia 🇸🇪", group: "Grupo F", time: "23:00", TV: "Sport TV 5"},
+    {date: "Qui, 25 Jun", match: "🇹🇳 Tunísia vs. Países Baixos 🇳🇱", group: "Grupo F", time: "23:00", TV: "Sport TV 1"},
+    {date: "Sex, 26 Jun", match: "🇹🇷 Turquia vs. EUA 🇺🇸", group: "Grupo D", time: "02:00", TV: "Sport TV 5 / LiveMode TV (YouTube)"},
+    {date: "Sex, 26 Jun", match: "🇵🇾 Paraguai vs. Austrália 🇦🇺", group: "Grupo D", time: "02:00", TV: "Sport TV 1"},
+    {date: "Sex, 26 Jun", match: "🇺🇾 Uruguai vs. Espanha 🇪🇸", group: "Grupo H", time: "20:00", TV: "Sport TV 1"},
+    {date: "Sex, 26 Jun", match: "🇨🇻 Cabo Verde vs. Arábia Saudita 🇸🇦", group: "Grupo H", time: "20:00", TV: "Sport TV 5"},
+    {date: "Sex, 26 Jun", match: "🇳🇴 Noruega vs. França 🇫🇷", group: "Grupo I", time: "23:00", TV: "<strong>TVI</strong> / Sport TV 5"},
+    {date: "Sex, 26 Jun", match: "🇸🇳 Senegal vs. Iraque 🇮🇶", group: "Grupo I", time: "23:00", TV: "Sport TV 1"},
+    {date: "Sáb, 27 Jun", match: "🇪🇬 Egito vs. Irão 🇮🇷", group: "Grupo G", time: "02:00", TV: "Sport TV 5"},
+    {date: "Sáb, 27 Jun", match: "🇳🇿 Nova Zelândia vs. Bélgica 🇧🇪", group: "Grupo G", time: "02:00", TV: "Sport TV 1"},
+    {date: "Sáb, 27 Jun", match: "🇵🇦 Panamá vs. Inglaterra 🏴󠁧󠁢󠁥󠁮󠁧󠁿", group: "Grupo L", time: "23:00", TV: "Sport TV 5"},
+    {date: "Sáb, 27 Jun", match: "🇭🇷 Croácia vs. Gana 🇬🇭", group: "Grupo L", time: "23:00", TV: "Sport TV 1"},
+    {date: "Dom, 28 Jun", match: "🇩🇿 Argélia vs. Áustria 🇦🇹", group: "Grupo J", time: "03:00", TV: "Sport TV 5"},
+    {date: "Dom, 28 Jun", match: "🇯🇴 Jordânia vs. Argentina 🇦🇷", group: "Grupo J", time: "03:00", TV: "Sport TV 1"},
+    {date: "Dom, 28 Jun", match: "🇨🇴 Colômbia vs. Portugal 🇵🇹", group: "Grupo K", time: "00:30", TV: "<strong>RTP</strong> / Sport TV 5 / LiveMode TV (YouTube)"},
+    {date: "Dom, 28 Jun", match: "🇨🇩 RD Congo vs. Usbequistão 🇺🇿", group: "Grupo K", time: "00:30", TV: "Sport TV 1"}
+];
+
+function buildTable(matches) {
+    const tableBody = document.getElementById("tableBody");
+    tableBody.innerHTML = "";
+
+    matches.forEach(item => {
+        const row = document.createElement("tr");
+        if (item.match.includes("Portugal")) {
+            row.className = "highlight-pt";
+        }
+        row.innerHTML = `
+            <td>${item.date}</td>
+            <td>${item.match}</td>
+            <td>${item.group}</td>
+            <td><span class="badge time-badge">${item.time}</span></td>
+            <td>${item.TV}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+function filterTable() {
+    let input = document.getElementById("searchInput");
+    let filter = input.value.toLowerCase();
+    let table = document.getElementById("matchTable");
+    let tr = table.getElementsByTagName("tr");
+
+    for (let i = 1; i < tr.length; i++) {
+        let showRow = false;
+        let tds = tr[i].getElementsByTagName("td");
+        for (let j = 0; j < tds.length; j++) {
+            if (tds[j] && tds[j].innerText.toLowerCase().indexOf(filter) > -1) {
+                showRow = true;
+                break;
+            }
+        }
+        tr[i].style.display = showRow ? "" : "none";
+    }
+}
+
+window.onload = function() {
+    buildTable(mundialMatches);
+};
+</script>
+</body>
+</html>
