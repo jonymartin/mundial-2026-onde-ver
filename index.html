@@ -392,7 +392,17 @@ function filterTable() {
 }
 
 window.onload = function() {
-    buildTable(mundialMatches);
+    // Força o dropdown visual a selecionar o "en" no arranque
+    document.getElementById("langSelect").value = "en";
+    // Atualiza os textos da página para Inglês
+    changeLanguage("en");
+    
+    if (typeof mundialMatches !== 'undefined') {
+        buildTable(mundialMatches);
+    } else {
+        console.error("Erro: A variável mundialMatches não foi encontrada.");
+    }
+    
     document.getElementById("footerDisclaimer").innerHTML = translations[currentLang].disclaimer;
 };
 </script>
