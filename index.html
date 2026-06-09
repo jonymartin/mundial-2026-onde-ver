@@ -320,14 +320,13 @@ function buildTable(matches) {
     tableBody.innerHTML = "";
 
     matches.forEach(item => {
-        // --- ESTA É A ÚNICA ALTERAÇÃO ---
+        
         // O filtro "free" agora deixa passar se for item.isFree OU se tiver "YouTube" no texto da TV
         if (activeFilter === "free") {
             const hasFreeTV = item.isFree;
             const hasYouTube = item.TV.includes("YouTube");
             if (!hasFreeTV && !hasYouTube) return;
         }
-        // ---------------------------------
 
         const row = document.createElement("tr");
         
@@ -346,7 +345,6 @@ function setQuickFilter(type) {
     activeFilter = type;
     document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
     if (type === 'all') document.getElementById('btnAll').classList.add('active');
-    if (type === 'portugal') document.getElementById('btnPT').classList.add('active');
     if (type === 'free') document.getElementById('btnFree').classList.add('active');
     
     buildTable(mundialMatches);
@@ -366,7 +364,6 @@ function changeLanguage() {
     document.getElementById("thTV").innerText = translations[currentLang].thTV;
     
     document.getElementById("btnAll").innerText = translations[currentLang].btnAll;
-    document.getElementById("btnPT").innerText = translations[currentLang].btnPT;
     document.getElementById("btnFree").innerText = translations[currentLang].btnFree;
 
     document.getElementById("footerDisclaimer").innerHTML = translations[currentLang].disclaimer;
