@@ -248,11 +248,13 @@
 
 <div class="search-container">
     <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Pesquise por país, grupo ou canal...">
-    <div class="filter-buttons">
-        <button class="filter-btn active" id="btnAll" onclick="setQuickFilter('all')">Todos os Jogos</button>
-        <button class="filter-btn" id="btnPT" onclick="setQuickFilter('portugal')">🇵🇹 Portugal</button>
-        <button class="filter-btn" id="btnFree" onclick="setQuickFilter('free')">📺 Canal Aberto</button>
-    </div>
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="setFilter('all')">Todos os Jogos</button>
+            <button class="filter-btn" onclick="setFilter('free')">Canal Aberto / Grátis</button>
+            <button class="filter-btn" onclick="setFilter('youtube')">Apenas YouTube</button>
+            <button class="filter-btn" onclick="setFilter('paid')">Canal Pago</button>
+            <button class="filter-btn" onclick="setFilter('portugal')">Jogos de Portugal</button>
+        </div>
 </div>
 
 <div class="table-container">
@@ -321,8 +323,25 @@ function buildTable(matches) {
     tableBody.innerHTML = "";
 
     matches.forEach(item => {
+        // --- NOVAS LÓGICAS DE FILTRO ---
+        
+        // 1. Filtro Portugal
         if (activeFilter === "portugal" && !item.isPT) return;
-        if (activeFilter === "free" && !item.isFree) return;
+        
+        // 2. Filtro Canal Aberto / Grátis (Agora inclui TV aberta OU YouTube)
+        if (activeFilter === "free") {
+            const hasFreeTV = item.isFree;
+            const hasYouTube = item.TV.includes("YouTube");
+            if (!hasFreeTV && !hasYouTube) return;
+        }
+        
+        // 3. Filtro Apenas YouTube
+        if (activeFilter === "youtube" && !item.TV.includes("YouTube")) return;
+        
+        // 4. Filtro Canal Pago (Sport TV)
+        if (activeFilter === "paid" && !item.TV.includes("Sport TV")) return;
+
+        // -------------------------------
 
         const row = document.createElement("tr");
         
@@ -337,15 +356,27 @@ function buildTable(matches) {
     });
 }
 
-function setQuickFilter(type) {
-    activeFilter = type;
-    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-    if (type === 'all') document.getElementById('btnAll').classList.add('active');
-    if (type === 'portugal') document.getElementById('btnPT').classList.add('active');
-    if (type === 'free') document.getElementById('btnFree').classList.add('active');
+let activeFilter = "all";
+
+function setFilter(filterType) {
+    activeFilter = filterType;
     
+    // Atualiza a classe ativa nos botões para o feedback visual continuar a funcionar
+    const buttons = document.querySelectorAll(".filter-btn");
+    buttons.forEach(btn => btn.classList.remove("active"));
+    
+    // Mapeia o clique ao botão correto
+    const currentBtn = Array.from(buttons).find(btn => {
+        if (filterType === 'all') return btn.getAttribute('onclick').includes('all');
+        if (filterType === 'free') return btn.getAttribute('onclick').includes('free');
+        if (filterType === 'youtube') return btn.getAttribute('onclick').includes('youtube');
+        if (filterType === 'paid') return btn.getAttribute('onclick').includes('paid');
+        if (filterType === 'portugal') return btn.getAttribute('onclick').includes('portugal');
+    });
+    if (currentBtn) currentBtn.classList.add("active");
+
+    // Recarrega a tabela com o filtro selecionado
     buildTable(mundialMatches);
-    filterTable();
 }
 
 function changeLanguage() {
@@ -391,5 +422,8 @@ window.onload = function() {
     buildTable(mundialMatches);
 };
 </script>
+    <footer style="text-align: center; margin-top: 30px; padding: 20px; font-size: 0.85rem; color: #888; border-top: 1px solid #eee;">
+    <p><strong>Disclaimer:</strong> Este site é meramente informativo e não tem qualquer ligação oficial com a FIFA ou as estações de televisão mencionadas. Os horários e transmissões estão sujeitos a alterações por parte dos operadores móveis ou canais de televisão.</p>
+</footer>
 </body>
 </html>
