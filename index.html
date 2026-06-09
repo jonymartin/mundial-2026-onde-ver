@@ -289,7 +289,6 @@ const translations = {
         lblTime: "Hora",
         lblTV: "Canais",
         btnAll: "Todos os Jogos",
-        btnPT: "🇵🇹 Portugal",
         btnFree: "📺 Canal Aberto",
         disclaimer: "<strong>Disclaimer:</strong> Este site é meramente informativo e não tem qualquer ligação oficial com a FIFA ou as estações de televisão mencionadas. Os horários e transmissões estão sujeitos a alterações por parte dos operadores ou canais de televisão."
     },
@@ -308,7 +307,6 @@ const translations = {
         lblTime: "Time",
         lblTV: "Channels",
         btnAll: "All Matches",
-        btnPT: "🇵🇹 Portugal",
         btnFree: "📺 Free-to-Air",
         disclaimer: "<strong>Disclaimer:</strong> This website is for informational purposes only and has no official connection with FIFA or the mentioned television stations. Schedules and broadcasts are subject to change by operators or TV channels."
     }
@@ -371,7 +369,7 @@ function changeLanguage() {
     document.getElementById("btnPT").innerText = translations[currentLang].btnPT;
     document.getElementById("btnFree").innerText = translations[currentLang].btnFree;
 
-    document.getElementById("footerDisclaimer").innerHTML = translations[lang].disclaimer;
+    document.getElementById("footerDisclaimer").innerHTML = translations[currentLang].disclaimer;
     
     buildTable(mundialMatches);
     filterTable();
